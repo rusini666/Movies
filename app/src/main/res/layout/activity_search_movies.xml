@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchMovies">
+
+    <TextView
+        android:id="@+id/typeMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="82dp"
+        android:hint="Type name of movie"
+        android:textColor="#1E1E1E"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/retrieveMovieBtn"
+        app:layout_constraintStart_toStartOf="@+id/retrieveMovieBtn" />
+
+    <Button
+        android:id="@+id/retrieveMovieBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="44dp"
+        android:text="Retrieve Movie"
+        app:layout_constraintBottom_toTopOf="@+id/saveMovieToDbBtn"
+        app:layout_constraintStart_toStartOf="@+id/saveMovieToDbBtn" />
+
+    <Button
+        android:id="@+id/saveMovieToDbBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="171dp"
+        android:text="Save movie to Database"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
