@@ -1,22 +1,32 @@
-package com.example.movies
+package com.example.mapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mapp.databases.AppDatabase
+import com.example.mapp.models.Movie
+import com.example.mapp.repositories.MoviesRepository
+import com.example.mapp.ui.helpers.MovieListAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class SearchMovies : AppCompatActivity() {
-    private val db by lazy { AppDatabase.getDatabase(this).movieInfoDao() }
-    private lateinit var moviesRepo: MoviesRepository
-    var movies = ArrayList<MovieInfo>()
+class SearchForMoviesActivity : AppCompatActivity() {
+    private val db by lazy { AppDatabase.getDatabase(this).movieDao() }
+    private lateinit var moviesRepo:MoviesRepository
+    var movies = ArrayList<Movie>()
     var moviesViewModel = MoviesViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +91,7 @@ class SearchMovies : AppCompatActivity() {
                     }
                 }
                 //hide the loading animation
-                loadingFrame.visibility = View.GONE
+               loadingFrame.visibility = View.GONE
             })
         }
 
@@ -124,12 +134,12 @@ class SearchMovies : AppCompatActivity() {
                         adapter.notifyDataSetChanged()
                         after()
                     }
-                }catch (e: Exception){
+                }catch (e:Exception){
                     //execute in main context
                     withContext(Dispatchers.Main){
                         //show error message
-                        Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(applicationContext, e.localizedMessage,Toast.LENGTH_SHORT)
+                                .show()
                         after()
                     }
                 }
@@ -145,6 +155,6 @@ class SearchMovies : AppCompatActivity() {
      * Main view model
      */
     class MoviesViewModel : ViewModel() {
-        val movies = MutableLiveData<List<MovieInfo>>()
+        val movies = MutableLiveData<List<Movie>>()
     }
 }

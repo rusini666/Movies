@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         // create an instance of the database
         val db = Room.databaseBuilder(this, AppDatabase::class.java, "movie-info-database").build()
-        movieInfoDao= db.movieInfoDao()
+        var movieInfoDao = db.movieInfoDao()
 
         val searchMovie = Intent(this,SearchMovies::class.java)
         val searchActor = Intent(this,SearchActors::class.java)

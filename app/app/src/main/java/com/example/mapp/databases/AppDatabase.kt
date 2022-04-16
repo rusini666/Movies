@@ -1,13 +1,17 @@
-package com.example.movies
+package com.example.mapp.databases
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mapp.dao.MovieDao
+import com.example.mapp.models.Movie
+import kotlinx.coroutines.CoroutineScope
+import kotlin.jvm.internal.Reflection
+import kotlin.jvm.internal.Reflection.createKotlinClass
 
-
-@Database(entities = [MovieInfo::class], version = 1, exportSchema = false)
-abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [Movie::class], version = 1, exportSchema = false)
+ abstract class AppDatabase : RoomDatabase() {
 
     companion object{
         private const val DB_NAME = "app_database"
@@ -24,7 +28,6 @@ abstract class AppDatabase : RoomDatabase() {
 
             return instance!!
         }
-
         private fun create(context: Context) : AppDatabase {
             return Room.databaseBuilder(
                 context,
@@ -32,8 +35,6 @@ abstract class AppDatabase : RoomDatabase() {
                 DB_NAME
             ).build()
         }
-
     }
-
-    abstract fun movieInfoDao(): MovieInfoDao
+    abstract fun movieDao(): MovieDao
 }

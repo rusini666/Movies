@@ -1,17 +1,20 @@
 package com.example.movies
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "movie-info-table")
+@Entity(tableName = "movie_info_table")
 data class MovieInfo(
-    val Title: String,
-    val Year: Int,
-    val Rated: String,
-    //val Released:"14 Oct 1994",
-    //val Runtime:"142 min",
-    val Genre: String,
-    val Director: String,
-    val Writer: String,
-    val Actors: String,
-    val Plot: String
+    @PrimaryKey(autoGenerate = true) var uid: Long = 0,
+    @ColumnInfo(name = "Title") var title: String? = null,
+    @ColumnInfo(name = "Year") var year: String? = null,
+    @ColumnInfo(name = "Rated") var rated:String? = null,
+    @ColumnInfo(name = "Released") var released:String? = null,
+    @ColumnInfo(name = "Runtime") var runtime:String? = null,
+    @ColumnInfo(name = "Genre") var genre:String? = null,
+    @ColumnInfo(name = "Director") var director:String? = null,
+    @ColumnInfo(name = "Writer") var writer:String? = null,
+    @ColumnInfo(name = "Actors") var actors:String? = null,
+    @ColumnInfo(name = "Plot") var plot:String? = null
 )
