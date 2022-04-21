@@ -1,8 +1,40 @@
 <resources>
-    <string name="app_name">Movies</string>
-    <string name="add_movies_to_db">Add Movies to DB</string>
-    <string name="search_for_movies">Search for Movies</string>
-    <string name="search_for_actors">Search for Actors</string>
-    <string name="search_for_actor">Search for actor</string>
-    <string name="enter_name_of_any_actor_on_your_preference">Enter name of any actor on your preference...</string>
+    <string name="app_name">MApp</string>
+
+    <!-- Activity main -->
+    <string name="add_movies_to_db_btn_text_activity_main">Add Movies to DB</string>
+    <string name="search_for_movies_btn_text_activity_main">Search For Movies</string>
+    <string name="search_for_actors_btn_text_activity_main">Search For Actors</string>
+    <string name="search_movies_in_web_btn_text_activity_main">Search Movies In Web</string>
+
+    <!-- Activity search actor -->
+    <string name="title_activity_search_for_actor">Search For Actors</string>
+    <string name="search_bar_text_activity_search_for_actor">Search actor name...</string>
+
+    <string name="no_results_message_activity_search_for_actor">No results found</string>
+    <string name="no_results_support_text_activity_search_for_actor">Unfortunately, we couldn\'t find movies that match your search…</string>
+
+    <string name="search_info_message_activity_search_for_actor">Search movies</string>
+    <string name="search_info_support_message_activity_search_for_actor">Enter any actor name on the search box...</string>
+
+    <!-- Activity Search Movies In Web    -->
+    <string name="title_activity_search_movies_in_web">Search Movies In Web</string>
+    <string name="search_bar_text_activity_search_movies_in_web">Search movie title...</string>
+
+    <string name="no_results_message_activity_search_movies_in_web">No results found</string>
+    <string name="no_results_support_activity_search_movies_in_web">Unfortunately, we couldn\'t find movies that match your search…</string>
+
+    <string name="search_info_message_activity_search_movies_in_web">Search movies</string>
+    <string name="search_info_support_message_activity_search_movies_in_web">Enter movie title on the search box...</string>
+
+    <!-- Activity Search For Movies -->
+    <string name="title_activity_search_for_movies">Search For Movies</string>
+    <string name="search_bar_text_activity_search_for_movies">Search movie title...</string>
+
+    <string name="no_results_message_activity_search_for_movies">No results found</string>
+    <string name="no_results_support_activity_search_for_movies">Unfortunately, we couldn\'t find movies that match your search…</string>
+
+    <string name="search_info_message_activity_search_for_movies">Search movies</string>
+    <string name="search_info_support_message_activity_search_for_movies">Enter movie title on the search box...</string>
+
 </resources>
