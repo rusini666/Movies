@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
+            style="@style/Theme.MApp.Toolbar"
             app:titleCentered="true"/>
 
         <RelativeLayout
@@ -32,6 +32,7 @@
 
             <EditText
                 style="@style/Theme.MApp.SearchBar.EditText"
+                android:hint="@string/search_bar_text_activity_search_for_movies"
                 android:id="@+id/search_text_edit"
                 android:layout_alignParentEnd="true"
                 android:textSize="18sp"
@@ -46,6 +47,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp">
             <Button
+                style="@style/Theme.MApp.Button.Primary"
                 android:layout_marginEnd="4dp"
                 android:id="@+id/search_btn"
                 android:src="@drawable/ic_search"
@@ -55,13 +57,14 @@
                 android:layout_weight="1"
                 android:text="Search"/>
             <Button
+                style="@style/Theme.MApp.Button.Primary"
                 android:layout_marginStart="4dp"
                 android:id="@+id/save_btn"
                 android:src="@drawable/ic_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Save"/>
+                android:text="Save" />
         </LinearLayout>
 
 
@@ -90,19 +93,21 @@
         android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textColor="?attr/colorOnPrimary"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textColor="?attr/colorOnPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_results_message_activity_search_for_movies"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="?attr/colorOnPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_results_support_activity_search_movies_in_web"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textColor="?attr/colorOnPrimary"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/search_info"
@@ -117,19 +122,21 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textColor="?attr/colorOnPrimary"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textColor="?attr/colorOnPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_info_message_activity_search_for_movies"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="?attr/colorOnPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_info_support_message_activity_search_for_movies"
+                android:textSize="15sp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textColor="?attr/colorOnPrimary"/>
 
 
     </LinearLayout>

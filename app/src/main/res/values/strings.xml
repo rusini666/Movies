@@ -3,4 +3,6 @@
     <string name="add_movies_to_db">Add Movies to DB</string>
     <string name="search_for_movies">Search for Movies</string>
     <string name="search_for_actors">Search for Actors</string>
+    <string name="search_for_actor">Search for actor</string>
+    <string name="enter_name_of_any_actor_on_your_preference">Enter name of any actor on your preference...</string>
 </resources>
