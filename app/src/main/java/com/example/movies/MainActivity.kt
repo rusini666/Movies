@@ -1,4 +1,4 @@
-package com.example.mapp
+package com.example.movies
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,43 +6,46 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.mapp.databases.AppDatabase
-import com.example.mapp.repositories.MoviesRepository
-import com.example.mapp.models.Movie
+import com.example.mapp.R
+import com.example.movies.database.AppDatabase
+import com.example.movies.database.Movie
+import com.example.movies.database.MoviesRepository
 import kotlinx.coroutines.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val db by lazy { AppDatabase.getDatabase(this).movieDao() }
+    lateinit var addMovies :Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        addMovies = findViewById(R.id.add_movies_to_db_btn)
+        val searchMovies = findViewById<Button>(R.id.search_for_movies_btn)
+        val searchActors = findViewById<Button>(R.id.search_for_actors_btn)
+        val searchWebMovies = findViewById<Button>(R.id.search_movies_in_web_btn)
 
-        //set click event listeners for all four navigation buttons
+        addMovies.setOnClickListener{
+            //fetch movies and save to the database
+            storeMoviesInDB(populateMovies())
+        }
 
-        findViewById<Button>(R.id.add_movies_to_db_btn)
-                .setOnClickListener{
-                    //fetch movies and save to the database
-                    storeMoviesInDB(populateMovies())
-                }
-        findViewById<Button>(R.id.search_for_movies_btn)
-                .setOnClickListener{
-                    //show search for movies activity
-                    showSearchForMoviesActivity()
-                }
-        findViewById<Button>(R.id.search_for_actors_btn)
-                .setOnClickListener{
-                    //show search for actors activity
-                    showSearchForActorsActivity()
-                }
+        searchMovies.setOnClickListener{
+            val showSearchForMoviesActivity = Intent(applicationContext, SearchForMoviesActivity::class.java)
+            startActivity(showSearchForMoviesActivity);
+        }
 
-        findViewById<Button>(R.id.search_movies_in_web_btn)
-                .setOnClickListener{
-                    //show search movies in web activity
-                    showSearchMoviesInWebActivity()
-                }
+        searchActors.setOnClickListener{
+            val showSearchForActorsActivity = Intent(applicationContext, SearchForActorActivity::class.java)
+            startActivity(showSearchForActorsActivity);
+        }
+
+
+        searchWebMovies.setOnClickListener{
+            val showSearchMoviesFromWebActivity = Intent(applicationContext, SearchMoviesInWebActivity::class.java)
+            startActivity(showSearchMoviesFromWebActivity);
+        }
     }
 
     /**
@@ -50,9 +53,9 @@ class MainActivity : AppCompatActivity() {
      * @returns generated movies
      */
     private fun populateMovies() : ArrayList<Movie> {
-        var movies = ArrayList<Movie>()
+        val movies = ArrayList<Movie>()
 
-        var movie1 = Movie()
+        val movie1 = Movie()
         movie1.title = "The Shawshank Redemption"
         movie1.year = "1994"
         movie1.rated = "R"
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         movie1.plot = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
         movies.add(movie1)
 
-        var movie2 = Movie()
+        val movie2 = Movie()
         movie2.title = "Batman: The Dark Knight Returns, Part 1"
         movie2.year = "2012"
         movie2.rated = "PG-13"
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         movie2.plot = "Batman has not been seen for ten years. A new breed of criminal ravages Gotham City, forcing 55-year-old Bruce Wayne back into the cape and cowl. But, does he still have what it takes to fight crime in a new era?"
         movies.add(movie2)
 
-        var movie3 = Movie()
+        val movie3 = Movie()
         movie3.title = "The Lord of the Rings: The Return of the King"
         movie3.year = "2003"
         movie3.rated = "PG-13"
@@ -91,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         movie3.plot = "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
         movies.add(movie3)
 
-        var movie4 = Movie()
+        val movie4 = Movie()
         movie4.title = "Inception"
         movie4.year = "2010"
         movie4.rated = "PG-13"
@@ -104,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         movie4.plot = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster."
         movies.add(movie4)
 
-        var movie5 = Movie()
+        val movie5 = Movie()
         movie5.title = "The Matrix"
         movie5.year = "1999"
         movie5.rated = "R"
@@ -127,31 +130,7 @@ class MainActivity : AppCompatActivity() {
     private fun storeMoviesInDB(movies:ArrayList<Movie>){
         lifecycleScope.launch {
             MoviesRepository(db, lifecycleScope, applicationContext).insertAll(movies)
-            Toast.makeText(applicationContext, "Success", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Successfully saved to Database!", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    /**
-     * Show 'search for movies' activity
-     */
-    private fun showSearchForMoviesActivity(){
-        intent = Intent(applicationContext, SearchForMoviesActivity::class.java)
-        startActivity(intent);
-    }
-
-    /**
-     * show 'search for actors' activity
-     */
-    private fun showSearchForActorsActivity(){
-        intent = Intent(applicationContext, SearchForActorActivity::class.java)
-        startActivity(intent);
-    }
-
-    /**
-     * show 'search movies in web' activity
-     */
-    private fun showSearchMoviesInWebActivity(){
-        intent = Intent(applicationContext, SearchMoviesInWebActivity::class.java)
-        startActivity(intent);
     }
 }

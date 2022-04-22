@@ -18,11 +18,11 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Theme.MApp.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            app:titleCentered="true" />
+            android:theme="?attr/actionBarTheme"
+            app:titleCentered="true"/>
 
         <RelativeLayout
             style="@style/Theme.MApp.SearchBar.parent"
@@ -31,22 +31,37 @@
             android:orientation="horizontal">
 
             <EditText
-                style="@style/Theme.MApp.SearchBar.EditText"
-                android:hint="@string/search_bar_text_activity_search_movies_in_web"
                 android:id="@+id/search_text_edit"
-                android:layout_toStartOf="@+id/search_btn"
-                android:textSize="18sp"
+                style="@style/Theme.MApp.SearchBar.EditText"
+                android:layout_width="370dp"
+                android:layout_height="54dp"
+                android:hint="@string/search_bar_text_activity_search_movies_in_web"
                 android:importantForAutofill="yes"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                style="@style/Theme.MApp.SearchBar.Button"
-                android:id="@+id/search_btn"
-                android:src="@drawable/ic_search"
-                android:layout_alignParentEnd="true"
-                android:clickable="true"
-                android:focusable="true"/>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/dark_red"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="Search" />
+
+        </LinearLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -74,21 +89,23 @@
         android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_results_message_activity_search_movies_in_web"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_results_support_activity_search_movies_in_web"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results_found"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results_support_activity_search_for_movies"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/search_info"
@@ -103,21 +120,21 @@
         android:orientation="vertical"
         android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_info_message_activity_search_movies_in_web"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_info_support_message_activity_search_movies_in_web"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_info_message_activity_search_movies_in_web"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="?attr/colorOnPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_info_support_message_activity_search_movies_in_web"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="?attr/colorOnPrimary"/>
 
 
     </LinearLayout>

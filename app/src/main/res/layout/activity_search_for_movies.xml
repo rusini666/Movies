@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            style="@style/Theme.MApp.Toolbar"
+            android:theme="?attr/actionBarTheme"
             app:titleCentered="true"/>
 
         <RelativeLayout
@@ -31,13 +31,14 @@
             android:orientation="horizontal">
 
             <EditText
-                style="@style/Theme.MApp.SearchBar.EditText"
-                android:hint="@string/search_bar_text_activity_search_for_movies"
                 android:id="@+id/search_text_edit"
+                style="@style/Theme.MApp.SearchBar.EditText"
                 android:layout_alignParentEnd="true"
-                android:textSize="18sp"
-                android:importantForAutofill="yes"
-                android:inputType="text"/>
+                android:hint="@string/search_bar_text_activity_search_for_movies"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -45,26 +46,27 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:gravity="center">
+
             <Button
-                style="@style/Theme.MApp.Button.Primary"
-                android:layout_marginEnd="4dp"
                 android:id="@+id/search_btn"
-                android:src="@drawable/ic_search"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:text="Search"/>
+                android:backgroundTint="@color/dark_red"
+                android:text="@string/retrieve_movie" />
+
             <Button
-                style="@style/Theme.MApp.Button.Primary"
-                android:layout_marginStart="4dp"
                 android:id="@+id/save_btn"
-                android:src="@drawable/ic_search"
-                android:layout_width="wrap_content"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:backgroundTint="@color/dark_red"
+                android:text="@string/save_movie_to_database" />
         </LinearLayout>
 
 
@@ -93,21 +95,23 @@
         android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_results_message_activity_search_for_movies"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_results_support_activity_search_movies_in_web"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results_found"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_results_support_activity_search_for_movies"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/search_info"
@@ -122,21 +126,21 @@
         android:orientation="vertical"
         android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_info_message_activity_search_for_movies"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_info_support_message_activity_search_for_movies"
-                android:textSize="15sp"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:textColor="?attr/colorOnPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_info_message_activity_search_for_movies"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="?attr/colorOnPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_info_support_message_activity_search_for_movies"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="?attr/colorOnPrimary"/>
 
 
     </LinearLayout>

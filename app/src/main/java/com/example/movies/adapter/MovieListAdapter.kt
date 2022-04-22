@@ -1,4 +1,4 @@
-package com.example.mapp.ui.helpers
+package com.example.movies.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mapp.R
-import com.example.mapp.models.Movie
+import com.example.movies.database.Movie
 
 class MovieListAdapter(private val movies : List<Movie>) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
@@ -29,16 +29,16 @@ class MovieListAdapter(private val movies : List<Movie>) : RecyclerView.Adapter<
         val movie = movies[position]
 
         //load the attribute holders with data
-        holder.titleTxt.text = movie.title.toString()
-        holder.yearTxt.text = movie.year.toString()
+        holder.titleTxt.text = "Title: " + "\"" + movie.title.toString() + "\""
+        holder.yearTxt.text = "Year: " + movie.year.toString()
         holder.director.text = "Director: " + movie.director.toString()
         holder.releasedTxt.text = "Released: " + movie.released.toString()
         holder.ratedTxt.text = "Rated: "+ movie.rated.toString()
         holder.runtimeTxt.text = "Runtime: " + movie.runtime.toString()
-        holder.writerTxt.text = "Genre: " + movie.writer.toString()
+        holder.writerTxt.text = "Writer: " + movie.writer.toString()
         holder.genreTxt.text = "Genre: " + movie.genre.toString()
         holder.actorsTxt.text = "Actors: " + movie.actors.toString()
-        holder.plotTxt.text = "Plot: " + movie.plot.toString()
+        holder.plotTxt.text = "Plot: " + "\"" + movie.plot.toString() + "\""
 
     }
 

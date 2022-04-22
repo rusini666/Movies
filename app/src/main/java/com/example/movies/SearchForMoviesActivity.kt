@@ -1,30 +1,26 @@
-package com.example.mapp
+package com.example.movies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mapp.databases.AppDatabase
-import com.example.mapp.models.Movie
-import com.example.mapp.repositories.MoviesRepository
-import com.example.mapp.ui.helpers.MovieListAdapter
-import com.google.android.material.appbar.MaterialToolbar
+import com.example.mapp.R
+import com.example.movies.adapter.MovieListAdapter
+import com.example.movies.database.AppDatabase
+import com.example.movies.database.Movie
+import com.example.movies.database.MoviesRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class SearchForMoviesActivity : AppCompatActivity() {
     private val db by lazy { AppDatabase.getDatabase(this).movieDao() }
-    private lateinit var moviesRepo:MoviesRepository
+    private lateinit var moviesRepo: MoviesRepository
     var movies = ArrayList<Movie>()
     var vModel = VViewModel()
 
@@ -32,7 +28,7 @@ class SearchForMoviesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_for_movies)
 
-        //configer the toolbar
+        //configure the toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -58,7 +54,7 @@ class SearchForMoviesActivity : AppCompatActivity() {
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
-        vModel = ViewModelProvider(this).get(SearchForMoviesActivity.VViewModel::class.java)
+        vModel = ViewModelProvider(this).get(VViewModel::class.java)
 
         //observe the changes against local movies variable
         vModel.movies.observe(this, Observer {
@@ -70,27 +66,27 @@ class SearchForMoviesActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         })
 
-        vModel.showLoading.observe(this, {
+        vModel.showLoading.observe(this) {
             if (it) {
                 loadingFrame.visibility = View.VISIBLE
             } else {
                 loadingFrame.visibility = View.GONE
             }
-        })
-        vModel.showInfoFrame.observe(this, {
+        }
+        vModel.showInfoFrame.observe(this) {
             if (it) {
                 searchInfoFrame.visibility = View.VISIBLE
             } else {
                 searchInfoFrame.visibility = View.GONE
             }
-        })
-        vModel.showNoInfoFrame.observe(this, {
+        }
+        vModel.showNoInfoFrame.observe(this) {
             if (it) {
                 searchNoInfoFrame.visibility = View.VISIBLE
             } else {
                 searchNoInfoFrame.visibility = View.GONE
             }
-        })
+        }
 
         //set click event handler for search  button
         searchBtn.setOnClickListener {

@@ -1,44 +1,43 @@
-package com.example.mapp
+package com.example.movies
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mapp.databases.AppDatabase
-import com.example.mapp.models.Movie
-import com.example.mapp.repositories.MoviesRepository
-import com.example.mapp.ui.helpers.MovieListAdapter
+import com.example.mapp.R
+import com.example.movies.adapter.MovieListAdapter
+import com.example.movies.database.AppDatabase
+import com.example.movies.database.Movie
+import com.example.movies.database.MoviesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SearchMoviesInWebActivity : AppCompatActivity() {
+class SearchForActorActivity : AppCompatActivity() {
     private val db by lazy { AppDatabase.getDatabase(this).movieDao() }
-    private lateinit var moviesRepo:MoviesRepository
+    private lateinit var moviesRepo: MoviesRepository
     var movies = ArrayList<Movie>()
-    private var vModel:VViewModel? =null
+    var vModel = VViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_for_movie_in_web)
+        setContentView(R.layout.activity_search_for_actor)
 
-        //configer toolbar
+        //configure toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
 
-
-        //define the necessary components
         val searchTextEdit = findViewById<EditText>(R.id.search_text_edit)
-        val searchBtn = findViewById<AppCompatImageButton>(R.id.search_btn)
+        val searchBtn = findViewById<Button>(R.id.search_btn)
         val searchInfoFrame = findViewById<LinearLayout>(R.id.search_info)
         val searchNoInfoFrame =  findViewById<LinearLayout>(R.id.no_search_results)
         val loadingFrame =  findViewById<FrameLayout>(R.id.loading_spinner)
@@ -67,28 +66,28 @@ class SearchMoviesInWebActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         })
 
-        vModel!!.showLoading.observe(this, {
+        vModel!!.showLoading.observe(this) {
             if (it) {
                 loadingFrame.visibility = View.VISIBLE
             } else {
                 loadingFrame.visibility = View.GONE
             }
-        })
-        vModel!!.showInfoFrame.observe(this, {
-            Log.i("SDSDSDSD", it.toString());
+        }
+        vModel!!.showInfoFrame.observe(this) {
+            Log.i("CHECK", it.toString());
             if (it) {
                 searchInfoFrame.visibility = View.VISIBLE
             } else {
                 searchInfoFrame.visibility = View.GONE
             }
-        })
-        vModel!!.showNoInfoFrame.observe(this, {
+        }
+        vModel!!.showNoInfoFrame.observe(this) {
             if (it) {
                 searchNoInfoFrame.visibility = View.VISIBLE
             } else {
                 searchNoInfoFrame.visibility = View.GONE
             }
-        })
+        }
 
         //set click event handler for search  button
         searchBtn.setOnClickListener {
@@ -96,32 +95,37 @@ class SearchMoviesInWebActivity : AppCompatActivity() {
             val searchWord = searchTextEdit.text?.trim().toString()
 
             //search the movies
-            searchMovies(searchWord, adapter, {
-                //show the loading animation
-                vModel!!.showLoading.value = true
-            }, {
-                //hide the no results and message sections
-                var sInfoFrame = false
-                var sNoInfoFrame = false
+            searchBtn.setOnClickListener {
+                //prepare the search word
+                val searchWord = searchTextEdit.text?.trim().toString()
+
+                //search the movies
+                searchMovies(searchWord, adapter, {
+                    //show the loading animation
+                    vModel!!.showLoading.value = true
+                }, {
+                    //hide the no results and message sections
+                    var sInfoFrame = false
+                    var sNoInfoFrame = false
 
 
-                if (searchWord.isEmpty()) {
-                    //show message section
-                    sInfoFrame = true
-                } else {
-                    if (movies.size < 1) {
-                        //show no results section
-                        sNoInfoFrame = true
+                    if (searchWord.isEmpty()) {
+                        //show message section
+                        sInfoFrame = true
+                    } else {
+                        if (movies.size < 1) {
+                            //show no results section
+                            sNoInfoFrame = true
+                        }
                     }
-                }
-                //hide the loading animation
-                vModel!!.showLoading.value = false
-                vModel!!.showInfoFrame.value = sInfoFrame
-                vModel!!.showNoInfoFrame.value = sNoInfoFrame
-            })
+                    //hide the loading animation
+                    vModel!!.showLoading.value = false
+                    vModel!!.showInfoFrame.value = sInfoFrame
+                    vModel!!.showNoInfoFrame.value = sNoInfoFrame
+                })
+            }
         }
-
-        moviesRepo = MoviesRepository(db, lifecycleScope, this)
+        moviesRepo = MoviesRepository(db, lifecycleScope, applicationContext)
     }
 
     /**
@@ -131,40 +135,25 @@ class SearchMoviesInWebActivity : AppCompatActivity() {
      * @param adapter data adapter
      * @param before callback that should execute before
      */
-    private fun searchMovies(
-        searchTerm: String,
-        adapter: MovieListAdapter,
-        before: () -> Unit,
-        after: () -> Unit
-    ){
+    private fun searchMovies(searchTerm: String, adapter: MovieListAdapter, before: () -> Unit, after: () -> Unit){
         before()
         movies.clear()
         if(searchTerm.isNotEmpty()){
 
             //Launch a new coroutine
             lifecycleScope.launch(Dispatchers.IO){
-                try {
-                    var newMovies = moviesRepo.findByTitleInWeb(searchTerm)
-
+                moviesRepo.findByActor(searchTerm).collect { mvs->
                     //execute in main context
                     withContext(Dispatchers.Main) {
                         //update the view models
-                        vModel!!.movies.value = newMovies
-                        after()
-                    }
-                }catch (e: Exception){
-                    //execute in main context
-                    withContext(Dispatchers.Main){
-                        //show an error message
-                        Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT)
-                                .show()
+                        vModel.movies.value = mvs as ArrayList<Movie>
                         after()
                     }
                 }
             }
 
         }else{
-            //notify other components about the changes
+            //notify the changes
             adapter.notifyDataSetChanged()
             after()
         }

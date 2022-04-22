@@ -1,11 +1,8 @@
-package com.example.mapp.services
+package com.example.movies.services
 
-import android.util.Log
-import kotlinx.coroutines.Dispatchers
 import java.io.BufferedReader
 import java.io.InputStream
 import java.lang.Exception
-import java.net.HttpURLConnection
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 

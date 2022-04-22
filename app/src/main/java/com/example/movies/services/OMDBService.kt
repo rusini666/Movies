@@ -1,10 +1,10 @@
-package com.example.mapp.services
+package com.example.movies.services
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import androidx.lifecycle.LifecycleCoroutineScope
-import com.example.mapp.models.Movie
+import com.example.movies.database.Movie
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -21,8 +21,7 @@ class OMDBService(scope: LifecycleCoroutineScope, context: Context) {
      */
     fun findMoviesByTitle(title: String) : List<Movie> {
             var movies = ArrayList<Movie>()
-            var apiKey = getApiKey()
-            var results = NetworkService.get("${url}/?t=${title}&apikey=${apiKey}")
+            var results = NetworkService.get("${url}/?t=${title}&apikey=1790e8dc")
 
 
                 try {
@@ -57,9 +56,4 @@ class OMDBService(scope: LifecycleCoroutineScope, context: Context) {
             return movies
         }
 
-    private fun getApiKey(): String? {
-        val app: ApplicationInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
-        val bundle = app.metaData
-        return bundle.getString("omdb.apikey")
-    }
 }

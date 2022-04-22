@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity"
     android:paddingVertical="15dp"
     android:paddingHorizontal="15dp">
 
@@ -25,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/search_bar_bg"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/dark_red"
         android:paddingHorizontal="10dp"
         android:paddingVertical="2dp"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_title_txt_view"
-        tools:text="Year:2020" />
+        tools:text="Year: 2000" />
 
     <TextView
         android:id="@+id/movie_rated_txt_view"
@@ -54,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_rated_txt_view"
-        tools:text="Released:14 Oct 2020" />
+        tools:text="Released: 27 Oct 2000" />
 
     <TextView
         android:id="@+id/movie_runtime_txt_view"
@@ -65,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_released_txt_view"
-        tools:text="Runtime: 142 min" />
+        tools:text="Runtime: 160 min" />
 
     <TextView
         android:id="@+id/movie_genre_txt_view"
@@ -87,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_genre_txt_view"
-        android:text="Director:Director name" />
+        tools:text="Director: Directors" />
 
     <TextView
         android:id="@+id/movie_writer_txt_view"
@@ -98,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_director_txt_view"
-        android:text="Writer:Writer name" />
+        tools:text="Writer: Writers" />
 
     <TextView
         android:id="@+id/movie_actors_txt_view"
@@ -109,13 +108,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_writer_txt_view"
-        tools:text="Actors: Actor 1, Actor 2" />
+        tools:text="Actors: Actors" />
 
     <TextView
         android:id="@+id/movie_plot_txt_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="25dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

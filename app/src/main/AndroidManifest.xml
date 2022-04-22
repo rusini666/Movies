@@ -14,9 +14,10 @@
 
         <meta-data
             android:name="omdb.apikey"
-            android:value="935fb1c4" />
+            android:value="1790e8dc" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.movies.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,17 +26,17 @@
         </activity>
 
         <activity
-            android:name=".SearchForMoviesActivity"
+            android:name="com.example.movies.SearchForMoviesActivity"
             android:label="@string/title_activity_search_for_movies">
         </activity>
 
         <activity
-            android:name=".SearchForActorActivity"
+            android:name="com.example.movies.SearchForActorActivity"
             android:label="@string/title_activity_search_for_actor">
         </activity>
 
         <activity
-            android:name=".SearchMoviesInWebActivity"
+            android:name="com.example.movies.SearchMoviesInWebActivity"
             android:label="@string/title_activity_search_movies_in_web">
         </activity>
 
